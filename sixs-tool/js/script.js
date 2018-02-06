@@ -17,10 +17,10 @@ window.onload = function() {
 };
 
 function loadData(){
-  var jsonData = database.ref('settings/messageGoal');
-
-  jsonData.once('value', function (snapshot) {
-    document.getElementById('1').innerHTML = snapshot.val();
+  var jsonMessageGoal = database.ref('settings/messageGoal');
+  // var jsonMessageGoal = database.ref('settings/messageGoal');
+  jsonMessageGoal.once('value', function (snapshot) {
+    document.getElementById('1').innerHTML = snapshot;
   })
 }
 
