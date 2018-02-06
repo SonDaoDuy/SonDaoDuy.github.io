@@ -74,7 +74,7 @@ function loadData(){
 
   var chatsNode = database.ref('chats');
 
-  chatsNode.on('value').then(function (snapshot) {
+  chatsNode.once('value', function (snapshot) {
     sessions = getChild(snapshot);
     while( sessions[0][0] == '+'){
       sessions.splice(0,1);
@@ -104,12 +104,12 @@ function loadData(){
         });
       }
     });
+
+  }
   document.getElementById('1').innerHTML = count_1;
   document.getElementById('2').innerHTML = count_2;
   document.getElementById('4').innerHTML = count_4;
   document.getElementById('5').innerHTML = count_3 - count_4;
-  }
-
 
 }
 
