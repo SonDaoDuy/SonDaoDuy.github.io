@@ -16,9 +16,19 @@ window.onload = function() {
   loadData();
 };
 
+function getChild(snapshot){
+  var ref = snapshot.ref();
+
+  return ref.child().name();
+}
+
 function loadData(){
   var jsonMessageGoal = database.ref('settings');
   console.log(jsonMessageGoal);
+
+  jsonMessageGoal.on('value', function (snapshot) {
+    console.log("all child name:" + getChild(snapshot));
+  });
   // var jsonMessageGoal = database.ref('settings/messageGoal');
   // jsonMessageGoal.once('value', function (snapshot) {
   //   document.getElementById('1').innerHTML = snapshot;
