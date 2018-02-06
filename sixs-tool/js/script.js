@@ -30,16 +30,14 @@ function getChild(dataSnapshot){
 }
 
 function loadData(){
-  var jsonMessageGoal = database.ref('settings');
-  console.log(jsonMessageGoal);
-
-  jsonMessageGoal.on('value', function (snapshot) {
+  var settingsNode = database.ref('settings');
+  settingsNode.on('value', function (snapshot) {
     console.log(getChild(snapshot));
   });
-  // var jsonMessageGoal = database.ref('settings/messageGoal');
-  // jsonMessageGoal.once('value', function (snapshot) {
-  //   document.getElementById('1').innerHTML = snapshot;
-  // })
+  var messageGoalNode = database.ref('settings/messageGoal');
+  messageGoalNode.once('value', function (snapshot) {
+    document.getElementById('1').innerHTML = snapshot.val();
+  });
 }
 
 
