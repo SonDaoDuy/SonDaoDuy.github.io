@@ -104,11 +104,12 @@ function loadData(){
         });
       }
     });
-  }
   document.getElementById('1').innerHTML = count_1;
   document.getElementById('2').innerHTML = count_2;
   document.getElementById('4').innerHTML = count_4;
   document.getElementById('5').innerHTML = count_3 - count_4;
+  }
+
 
 }
 
