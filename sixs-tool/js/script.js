@@ -22,7 +22,7 @@ function getChild(dataSnapshot){
 
   dataSnapshot.forEach(
       function(childSnapshot) {
-          videoIds[videoIdIndex++] = childSnapshot.name();
+          videoIds[videoIdIndex++] = childSnapshot.key;
       }
   );
 
