@@ -9,14 +9,30 @@ const config = {
 
 firebase.initializeApp(config);
 
-$(document).ready(function() {
-  // sample
-  getMessageGoal(document);
-});
+// Get a reference to the database service
+var database = firebase.database();
 
-// sample of how to get data from DB
-const getMessageGoal = document => {
-  firebase.database().ref('settings/messageGoal').once('value', snapshot => {
+window.onload = function() {
+  loadData();
+};
+
+function loadData(){
+  var jsonData = database.ref('settings/messageGoal');
+
+  jsonData.once('value', function (snapshot) {
     document.getElementById('1').innerHTML = snapshot.val();
   })
 }
+
+
+// $(document).ready(function() {
+//   // sample
+//   getMessageGoal(document);
+// });
+
+// // sample of how to get data from DB
+// const getMessageGoal = document => {
+//   firebase.database().ref('settings/messageGoal').once('value', snapshot => {
+//     document.getElementById('1').innerHTML = snapshot.val();
+//   })
+// }
