@@ -17,7 +17,7 @@ window.onload = function() {
 };
 
 function loadData(){
-  var jsonMessageGoal = database.ref('settings/messageGoal');
+  var jsonMessageGoal = database.ref('settings');
   // var jsonMessageGoal = database.ref('settings/messageGoal');
   jsonMessageGoal.once('value', function (snapshot) {
     document.getElementById('1').innerHTML = snapshot;
