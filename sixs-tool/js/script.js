@@ -16,10 +16,17 @@ window.onload = function() {
   loadData();
 };
 
-function getChild(snapshot){
-  var ref = snapshot.ref();
+function getChild(dataSnapshot){
+  var videoIdIndex = 0;
+  var videoIds = new Array();
 
-  return ref.child().name();
+  dataSnapshot.forEach(
+      function(childSnapshot) {
+          videoIds[videoIdIndex++] = childSnapshot.name();
+      }
+  );
+
+  return videoIds;
 }
 
 function loadData(){
@@ -27,7 +34,7 @@ function loadData(){
   console.log(jsonMessageGoal);
 
   jsonMessageGoal.on('value', function (snapshot) {
-    console.log("all child name:" + getChild(snapshot));
+    console.log(getChild(snapshot));
   });
   // var jsonMessageGoal = database.ref('settings/messageGoal');
   // jsonMessageGoal.once('value', function (snapshot) {
