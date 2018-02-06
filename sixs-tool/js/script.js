@@ -74,41 +74,43 @@ function loadData(){
 
   var chatsNode = database.ref('chats');
 
-  chatsNode.on('value', function (snapshot) {
+  chatsNode.on('value').then(function (snapshot) {
     sessions = getChild(snapshot);
     while( sessions[0][0] == '+'){
       sessions.splice(0,1);
     }
     count_3 = sessions.length;
-    for (var i = 0; i < sessions.length; i++) {
-      var sessionsNode = database.ref('chats/'+ sessions[i]);
-      sessionsNode.on('value').then(function (snapshot) {
-        var checkMess = snapshot.child('messages').exists();
-        if(checkMess){
-          var messagesNode = database.ref('chats/' + sessions[i] + '/messages');
-          messagesNode.on('value').then(function (snapshot) {
-            var messagesIds = getChild(snapshot);
-            if (messagesIds.length > 33) {
-              count_4++;
-              count_2 += messagesIds.length - 33;
-            }
-            for (var i = 0; i < messagesIds.length; i++) {
-              var status = checkCount1(messagesIds[i]);
-              if (status) {
-                count_1++;
-              }
-            }
-          });
-        }
-      });
-
-    }
     document.getElementById('3').innerHTML = count_3;
-    document.getElementById('1').innerHTML = count_1;
-    document.getElementById('2').innerHTML = count_2;
-    document.getElementById('4').innerHTML = count_4;
-    document.getElementById('5').innerHTML = count_3 - count_4;
+  });
+
+  for (var i = 0; i < sessions.length; i++) {
+    var sessionsNode = database.ref('chats/'+ sessions[i]);
+    sessionsNode.on('value').then(function (snapshot) {
+      var checkMess = snapshot.child('messages').exists();
+      if(checkMess){
+        var messagesNode = database.ref('chats/' + sessions[i] + '/messages');
+        messagesNode.on('value').then(function (snapshot) {
+          var messagesIds = getChild(snapshot);
+          if (messagesIds.length > 33) {
+            count_4++;
+            count_2 += messagesIds.length - 33;
+          }
+          for (var i = 0; i < messagesIds.length; i++) {
+            var status = checkCount1(messagesIds[i]);
+            if (status) {
+              count_1++;
+            }
+          }
+        });
+      }
     });
+  document.getElementById('1').innerHTML = count_1;
+  document.getElementById('2').innerHTML = count_2;
+  document.getElementById('4').innerHTML = count_4;
+  document.getElementById('5').innerHTML = count_3 - count_4;
+  }
+
+
 }
 
 
